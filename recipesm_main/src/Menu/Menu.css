@@ -7,6 +7,7 @@ ul {
     padding: 0;
     width: 80px;
     height: 100vh;
+    z-index: 2;
     background-color: #f1f1f1;
     display: flex;
 	flex-direction: column;
@@ -28,4 +29,14 @@ ul {
   li a:hover:not(.active) {
     background-color: rgb(134, 235, 176);
     color: white;
+  }
+  .logoFixed{
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 2;
+    width: 45%;
+    height: 80px;
+    background-color: #f1f1f1;
+
   }

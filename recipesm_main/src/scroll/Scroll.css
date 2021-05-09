@@ -1,0 +1,23 @@
+.outerScroll{
+    position: fixed;
+     top:80px;
+     left:180px;
+     width:40%}
+ .booking-card {
+     position: relative;
+    width: 700px;
+    height: 300px;
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    margin-bottom: 30px;
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+    overflow: hidden;
+    background-position: center center;
+    background-size: cover;
+    text-align: center;
+    color: #0a4870;
+    transition: 0.3s;
+}

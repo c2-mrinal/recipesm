@@ -1,0 +1,15 @@
+.menuApp{
+    position: fixed;
+    top:0;
+    left:0;
+}
+.scrollApp{
+position: fixed;
+top:0;
+left:550px;
+}
+.mainApp{
+    position: fixed;
+    top:0;
+    left:0;
+}

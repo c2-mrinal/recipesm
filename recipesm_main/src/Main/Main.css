@@ -1,0 +1,8 @@
+.mainContent{
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: 55%;
+    background-color: rgba(0, 255, 13, 0.514) ;
+}
