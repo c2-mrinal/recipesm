@@ -1,0 +1,23 @@
+.popularBox{
+    background-repeat: no-repeat;
+    height:400px;
+    width:350px;
+    text-align: center;
+}
+.dishNameBorder{
+    margin: auto;
+    text-align: center;
+    width: 350px;
+    position: fixed;
+    height: 80px;
+    bottom: 0;
+    background-color: tomato;
+    color: aliceblue;
+    transform: perspective(350px) rotateY(0deg);
+}
+.dishDescription{
+    display:none;
+}
+.popularBox:hover{
+
+}

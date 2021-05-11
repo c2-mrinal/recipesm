@@ -2,10 +2,20 @@
     position: fixed;
      top:80px;
      left:180px;
-     width:40%}
+     width:40%;
+    }
+
+
+
+     .innerScroll{
+        position: relative;
+        display: block;
+        overflow: scroll;
+
+     }
  .booking-card {
-     position: relative;
-    width: 700px;
+    position: relative;
+    width: 400px;
     height: 300px;
     display: flex;
     flex-direction: row;
