@@ -13,6 +13,8 @@ export default function Scroll() {
 
     ])
     return (
+
+        <div>
         <div className='outerScroll'>
                 <div  className='innerScroll'>
                     {dummyData.map(d=>{
@@ -30,6 +32,7 @@ export default function Scroll() {
                     }
                     </div>
 
+        </div>
         </div>
     )
 }

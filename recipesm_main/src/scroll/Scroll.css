@@ -1,20 +1,15 @@
 .outerScroll{
     position: fixed;
-     top:80px;
-     left:180px;
-     width:40%;
+     top:0;
+     left:100px;
+     width:45%;
+     overflow: scroll;
+
     }
-
-
-
-     .innerScroll{
-        position: relative;
-        display: block;
-        overflow: scroll;
-
+   .innerScroll{
+    position: relative;
      }
  .booking-card {
-    position: relative;
     width: 400px;
     height: 300px;
     display: flex;

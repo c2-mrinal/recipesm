@@ -6,10 +6,11 @@
 .scrollApp{
 position: fixed;
 top:0;
-left:550px;
+overflow-y: scroll;
+
 }
 .mainApp{
-    position: fixed;
-    top:0;
-    left:0;
+    /* position: fixed;
+    top:60;
+    left:80; */
 }

@@ -1,8 +1,8 @@
 .mainContent{
     position: fixed;
-    top: 0;
-    right: 0;
+    top:200;
+    left:300;
     height: 100vh;
-    width: 55%;
-    background-color: rgba(0, 255, 13, 0.514) ;
+    width: 100%;
+    overflow-y: scroll;
 }
