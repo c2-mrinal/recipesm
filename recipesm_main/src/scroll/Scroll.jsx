@@ -13,8 +13,10 @@ export default function Scroll() {
 
     ])
     return (
+
+        <div>
         <div className='outerScroll'>
-            
+                <div  className='innerScroll'>
                     {dummyData.map(d=>{
                         return(
                             <li className="booking-card" style={{backgroundColor:'yellow'}}>
@@ -28,8 +30,9 @@ export default function Scroll() {
                     })
                    
                     }
-                    
+                    </div>
 
+        </div>
         </div>
     )
 }
