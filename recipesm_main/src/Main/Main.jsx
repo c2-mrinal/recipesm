@@ -7,6 +7,8 @@ import Dish from '../Main/Content/Dish';
 import Contact from '../Main/Content/Contact';
 import About from '../Main/Content/About';
 import Profile from '../Main/Content/Profile';
+import CreateRecipe from './Recipe/CreateRecipe';
+import ViewRecipe from './Recipe/ViewRecipe';
 function Main() {
     return (
         <div className='mainContent'>
@@ -16,7 +18,14 @@ function Main() {
                 <Route path='/Contact' component={Contact}/> 
                 <Route path='/About' component={About}/>
                 <Route path='/Profile' component={Profile}/>
+                <Route path='/CreateRecipe' component={CreateRecipe}/>
+                <Route path='/ViewRecipe' component={ViewRecipe}/>
+
+                
+            
             </Switch>
+          
+            
         </div>
     )
 }
