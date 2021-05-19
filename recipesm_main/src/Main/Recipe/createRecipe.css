@@ -23,6 +23,8 @@
   border:1px solid;
   text-align:center;
   border-radius:20px;
+  display: grid;
+  grid-template-columns: auto auto auto auto ;
 }
 .addButton{
   width:100%;
@@ -86,8 +88,43 @@
 
 
 
+/* capsule start */
+/* .capsuleBox{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+} */
+.inputCapsule{
+  display:grid;
+  grid-template-columns: 5fr 1fr;
+  /* justify-content:space-between; */
+  border:1px solid rgb(119, 119, 190);
+  border-radius:5px;
+  min-width:200px;
+  padding: 0 0 0 10px;
+  text-align:center;
+  font-size:1em;
+  margin:auto;
+
+}
+.dataCapsule{
+  display:grid;
+  grid-template-columns: 3fr 1fr;
+}
+.centerCapsule{
+
+}
+.closeCapsule{
+  padding: 0 8px;
+  border-left: 1px solid  ;
+  border-radius:1px;
 
 
+}
+.closeCapsule:hover{
+  color:tomato;
+}
+/* capsle end */
 
 /* inputBox Design */
 .form__group {
