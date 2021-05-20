@@ -68,6 +68,19 @@ class ContactUser(BaseView):
     #     ),
     # ]
     # data = db.session.execute("select * from contact")
+
+    @expose('/loginuser')
+    @has_access
+    def loginuser(self):
+        user = db.Table('ab_user',db.metadata,autoload=True,autoload_with = db.engine)
+        data = db.session.query(user).all()
+        # data ='shruti'
+        l = []
+        for i in data:
+            l.append({i.username:i})
+        users= {'users':l}
+        return users
+
     @expose('/data/show')
     @has_access
     def fun(self):
@@ -82,12 +95,15 @@ class ContactUser(BaseView):
     @expose('/data/insert')
     @has_access
     def insertfun(self):
-        data2 = db.session.query(User).all()
+        # data2 = db.session.query(User).all()
         new_user = User(user_name='Mrinal',email_id='c2_mrinal@gmail.com',gender='Male',age=24)
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for('func'))
+        data2 = db.session.query(User).all()
+        data = {'data':data2}
+        return data
+        # return redirect(url_for('func'))
 
 class Usermodel(ModelView):
     datamodel = SQLAInterface(User)
