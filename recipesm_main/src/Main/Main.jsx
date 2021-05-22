@@ -1,6 +1,6 @@
 import React from 'react'
  import './Main.css'
- import {Switch , Route} from 'react-router-dom';
+ import {Switch , Route , Redirect} from 'react-router-dom';
 
  import Explore from '../Main/Content/Explore';
 import Dish from '../Main/Content/Dish';
@@ -13,16 +13,16 @@ function Main() {
     return (
         <div className='mainContent'>
               <Switch>
-                <Route exact path='/' component={Explore}/> 
+              <Route exact path="/" render={() => (<Redirect to="/Explore" />)} />   
+                <Route exact path='/Explore' component={Explore}/> 
                 <Route  path='/Dish' component={Dish} />
                 <Route path='/Contact' component={Contact}/> 
                 <Route path='/About' component={About}/>
                 <Route path='/Profile' component={Profile}/>
                 <Route path='/CreateRecipe' component={CreateRecipe}/>
                 <Route path='/ViewRecipe' component={ViewRecipe}/>
-
-                
-            
+                {/* <Redirect from='/CreateRecipe' to="/ViewRecipe" />
+                <Redirect from='/ViewRecipe' to="/CreateRecipe" /> */}
             </Switch>
           
             
