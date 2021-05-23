@@ -1,0 +1,7 @@
+.mainContent{
+    position: relative;
+    top:60px;
+    left:90px;
+    width: 95%;
+    /* overflow-y: scroll; */
+}
