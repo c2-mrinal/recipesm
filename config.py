@@ -66,8 +66,7 @@ MAIL_USE_TLS = True
 MAIL_USERNAME = 'shruti28299'
 MAIL_PASSWORD = '********'
 MAIL_DEFAULT_SENDER = 'shruti28299@gmail.com'
-# shruit28299@gmail.com
-# shruti99#*
+
 
 ########################################################################
 
