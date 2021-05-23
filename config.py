@@ -55,16 +55,19 @@ AUTH_TYPE = AUTH_DB
 # AUTH_TYPE = 1 # Database Authentication
 AUTH_USER_REGISTRATION = True
 AUTH_USER_REGISTRATION_ROLE = 'Public'
+RECAPTCHA_DISABLE = True
 RECAPTCHA_USE_SSL = False
 # Config for Flask-WTF Recaptcha necessary for user registration
-RECAPTCHA_PUBLIC_KEY = 'NEW PUBLIC KEY FOR RECAPTCHA'
-RECAPTCHA_PRIVATE_KEY = 'NEW PRIVATE KEY FOR RECAPTCHA'
+RECAPTCHA_PUBLIC_KEY = '6LflLeYaAAAAAEE8hhSz5rRCklxKZiV94jPpHoSU'
+RECAPTCHA_PRIVATE_KEY = '6LflLeYaAAAAAP9H19ic6YkQidOiiVu7YvwwWC37'
 # Config for Flask-Mail necessary for user registration
 MAIL_SERVER = 'smtp.gmail.com'
 MAIL_USE_TLS = True
-MAIL_USERNAME = 'yourappemail@gmail.com'
-MAIL_PASSWORD = 'passwordformail'
-MAIL_DEFAULT_SENDER = 'fabtest10@gmail.com'
+MAIL_USERNAME = 'shruti28299'
+MAIL_PASSWORD = '********'
+MAIL_DEFAULT_SENDER = 'shruti28299@gmail.com'
+# shruit28299@gmail.com
+# shruti99#*
 
 ########################################################################
 
