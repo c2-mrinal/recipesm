@@ -4,6 +4,7 @@ import Select from 'react-select';
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
 import { MdRateReview } from 'react-icons/md';
 import { useLocation, useHistory } from "react-router-dom";
+import ReactTooltip from 'react-tooltip';
 
 
 function CreateRecipe() {
@@ -260,19 +261,21 @@ function CreateRecipe() {
                             </div>
                         </div>
                         <div className='addButton'>
-                            <input type='button' value='Add Ingredient' name='Ingredient' className='addClickButton' onClick={addNewData} />
+                            <input type='button' value='Add Ingredient' name='Ingredient' className='addClickButton' data-tip='Save to Ingredient Table ' onClick={addNewData} />
+                            <ReactTooltip />
                         </div>
                     </div>
                     <div className='addedIngredientBox'>
                         {TotalIngredients && TotalIngredients.length != 0 &&
                             TotalIngredients.map((t, id) => {
                                 return (
-                                    <div className={checkingID == id && typeSelected == 'TotalIngredients' ? 'inputCapsuleClicked' : 'inputCapsule'} id={'TotalIngredients,' + id} onClick={editValue}>
-                                        <div className='dataCapsule'>
+                                    <div className={checkingID == id && typeSelected == 'TotalIngredients' ? 'inputCapsuleClicked' : 'inputCapsule'} >
+                                        <div className='dataCapsule' id={'TotalIngredients,' + id} onClick={editValue} data-tip='Click to Modify It ' >
                                             <div>{t['name']}</div>
                                             <div className='centerCapsule'>{t['unit']}<span className='unitIndicator'>{t['unitType'].value}</span></div>
                                         </div>
-                                        <div className='closeCapsule' ><button id={id} name='TotalIngredients' value={t['name']} onClick={deleteValue} >X</button></div>
+                                        <div className='closeCapsule' ><button id={id} name='TotalIngredients' value={t['name']} onClick={deleteValue}  data-tip='DELETE ' data-background-color='tomato'>X</button></div>
+                                        <ReactTooltip />
                                     </div>
                                 )
                             })}
@@ -305,19 +308,23 @@ function CreateRecipe() {
                             </div>
                         </div>
                         <div className='addButton'>
-                            <input type='button' value='Add Equipment' name='Equipment' className='addClickButton' onClick={addNewData} />
+                            <input type='button' value='Add Equipment' name='Equipment' className='addClickButton' onClick={addNewData} data-tip='Save to Equipment Table ' />
+                            <ReactTooltip/>
                         </div>
                     </div>
                     <div className='addedIngredientBox'>
                         {TotalEquipment && TotalEquipment.length !== 0 &&
                             TotalEquipment.map((t, id) => {
                                 return (
-                                    <div className={checkingID == id && typeSelected == 'TotalEquipment' ? 'inputCapsuleClicked' : 'inputCapsule'} id={'TotalEquipment,' + id} onClick={editValue}>
-                                        <div className='dataCapsule'>
+                                    <div className={checkingID == id && typeSelected == 'TotalEquipment' ? 'inputCapsuleClicked' : 'inputCapsule'} >
+                                        <div className='dataCapsule'  id={'TotalEquipment,' + id} onClick={editValue} data-tip='Click to Modify It '>
                                             <div>{t['name']}</div>
                                             <div className='centerCapsule'>{t['unit']}<span className='unitIndicator'>{t['unitType'].value}</span></div>
                                         </div>
-                                        <div className='closeCapsule' ><button id={id} name='TotalEquipment' value={t['name']} onClick={deleteValue} >X</button></div>
+                                        <div className='closeCapsule' >
+                                            <button id={id} name='TotalEquipment' value={t['name']} onClick={deleteValue} data-tip='DELETE ' data-background-color='tomato'>X</button>
+                                            </div>
+                                        <ReactTooltip />
                                     </div>
                                 )
                             })}
@@ -327,7 +334,7 @@ function CreateRecipe() {
             <section className='preperationBox'>
                 <div className='prepHeader'>
                     <div> <h2 className={{ display: 'inline' }}>Preperation Steps</h2> </div>
-                    <div><button type='button' name='PreperationStep' className='PreperationStepAdd' onClick={addNewData}>+</button></div>
+                    <div><button type='button' name='PreperationStep' className='PreperationStepAdd' onClick={addNewData} data-tip='Add Step '>+</button></div>
                 </div>
                 {Preperation && Preperation.length !== 0 &&
                     Preperation.map((v, id) => {
@@ -339,7 +346,8 @@ function CreateRecipe() {
                                 <textarea className='stepDescTextarea' placeholder='Add Your Delicious Step' key={id} name='Preperation' id={id} onChange={addNewData} value={v} />
                             </div>
                             <div>
-                                <button type="button" name='PreperationStep' className='deleteStepPrep' id={id} onClick={deleteValue}>X</button>
+                                <button type="button" name='PreperationStep' className='deleteStepPrep' id={id} onClick={deleteValue} data-tip='DELETE ' data-background-color='tomato'>X</button>
+                                <ReactTooltip />
                             </div>
                         </div>)
                     })}
@@ -391,18 +399,25 @@ function CreateRecipe() {
                                             </div>
                                         </div>
                                         <div className='addButton'>
-                                            <input type='button' value='Add Nutrition' name='Nutrition' className='addClickButton' onClick={addNewData} />
+                                            <input type='button' value='Add Nutrition' name='Nutrition' className='addClickButton' onClick={addNewData} data-tip='Save to Nutrition Table ' />
+                                            <ReactTooltip/>
                                         </div>
                                     </div>
                                     <div className='addedIngredientBox'>
                                         {TotalNutrition && TotalNutrition.length !== 0 &&
                                             TotalNutrition.map((t, id) => {
                                                 return (
-                                                    <div className={checkingID == id && typeSelected == 'TotalNutrition' ? 'inputCapsuleClicked' : 'inputCapsule'} id={'TotalNutrition,' + id} onClick={editValue}>
-                                                        <div className='dataCapsule'>
+                                                    <div className={checkingID == id && typeSelected == 'TotalNutrition' ? 'inputCapsuleClicked' : 'inputCapsule'} >
+                                                        <div className='dataCapsule'  id={'TotalNutrition,' + id} onClick={editValue}  data-tip='Click to Modify It '>
                                                             <div>{t['name']}</div>
-                                                            <div className='centerCapsule'>{t['unit']}<span className='unitIndicator'>{t['unitType'].value}</span></div></div>
-                                                        <div className='closeCapsule' ><button id={id} name='TotalNutrition' value={t['name']} onClick={deleteValue} >X</button></div>
+                                                            <div className='centerCapsule'>{t['unit']}
+                                                            <span className='unitIndicator'>{t['unitType'].value}</span>
+                                                            </div>
+                                                            </div>
+                                                        <div className='closeCapsule' >
+                                                            <button id={id} name='TotalNutrition' value={t['name']} onClick={deleteValue} data-tip='DELETE ' data-background-color='tomato'>X</button>
+                                                            </div>
+                                                        <ReactTooltip />
                                                     </div>)
                                             })}
                                     </div>
@@ -420,7 +435,8 @@ function CreateRecipe() {
                         </div>
                     </div>}
             </section>
-            <button type="button" className='finalSubmitButton' onClick={makeReview} >  Review <span><MdRateReview /></span></button>
+            <button type="button" className='finalSubmitButton' onClick={makeReview} data-tip='Click to review your input'>  Review <span><MdRateReview /></span></button>
+            <ReactTooltip />
         </div>
     )
 

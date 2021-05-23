@@ -6,6 +6,7 @@ import { AiOutlineStar, AiTwotoneStar } from 'react-icons/ai'
 import { GiOpenedFoodCan } from 'react-icons/gi';
 import { BiFoodMenu } from 'react-icons/bi';
 import { FaUtensils } from 'react-icons/fa';
+import ReactTooltip from 'react-tooltip';
 
 function ViewRecipe() {
     const [details, setdetails] = useState({
@@ -32,6 +33,7 @@ function ViewRecipe() {
     const location = useLocation();
     const history = useHistory();
     useEffect(() => {
+        if(location.state){
         const { edit2view, RecipeHead, Time, TotalEquipment, TotalNutrition, TotalIngredients, Preperation } = location.state;
         if (edit2view === true) {
             setdetails({ ...RecipeHead });
@@ -43,6 +45,7 @@ function ViewRecipe() {
             setdisplay({ reviewSection: false })
             // console.log(myparam);
         }
+    }
     }, [])
     const editContent = () => {
         history.push({
@@ -107,7 +110,12 @@ function ViewRecipe() {
                             <div className='ingredient'>
                                 {Ingredient.length !== 0 &&
                                     Ingredient.map((t, id) => {
-                                        return <div className='eachIngredients' key={'I' + id}><GiOpenedFoodCan /><span>{t.name}</span><span>{t.unit}</span><span>{t.unitType.value}</span></div>
+                                        return <div className='eachIngredients' key={'I' + id}>
+                                            <GiOpenedFoodCan />
+                                            <span>{t.name}</span>
+                                            <span>{t.unit}</span>
+                                            <span>{t.unitType.value}</span>
+                                            </div>
                                     })
                                 }
                             </div>
@@ -118,7 +126,12 @@ function ViewRecipe() {
                             <div className='equipment'>
                                 {Equipment.length !== 0 &&
                                     Equipment.map((t, id) => {
-                                        return <div className='eachEquipment' key={'E' + id}><FaUtensils /><span>{t.name}</span><span>{t.unit}</span><span>{t.unitType.value}</span></div>
+                                        return <div className='eachEquipment' key={'E' + id}>
+                                            <FaUtensils />
+                                            <span>{t.name}</span>
+                                            <span>{t.unit}</span>
+                                            <span>{t.unitType.value}</span>
+                                            </div>
                                     })}
                             </div>
                         </fieldset>
@@ -171,8 +184,9 @@ function ViewRecipe() {
             }
             {display.reviewSection === false &&
                 <div className='reviewSectionDisplay'>
-                    <div className='reviewButton'><input type='button' value='Edit' onClick={editContent} /></div>
-                    <div className='reviewButton'><input type='button' value='Save' onClick={(e) => { }} /></div>
+                    <div className='reviewButton'><input type='button' value='Edit' onClick={editContent}   data-tip='Re-Edit your Recipe ' data-background-color='lightgreen'/></div>
+                    <div className='reviewButton'><input type='button' value='Save' onClick={(e) => { }}  data-tip='Save your Recipe ' data-background-color='lightgreen'/></div>
+                    <ReactTooltip/>
                 </div>
             }
         </div>
