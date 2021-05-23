@@ -4,7 +4,7 @@ import {CgProfile} from 'react-icons/cg';
 import {BsFillHouseDoorFill} from "react-icons/bs";
 import {MdImportContacts} from "react-icons/md";
 import {BiDish} from 'react-icons/bi';
-import {Link} from 'react-router-dom';
+import {NavLink} from 'react-router-dom';
 
 import './Menu.css';
 import Login from './Login';
@@ -27,11 +27,11 @@ function Menu() {
               {loginBox && <Login></Login>}
             </div> 
         <ul>
-        <li><Link  to="/"><BsFillHouseDoorFill  size='36'/>Explore</Link></li>
-        <li><Link  to="/Dish"><BiDish size='36'/>Dish</Link></li>
-        <li><Link  to="/Contact"><MdImportContacts size='36'/>Contact</Link></li>
-        <li><Link  to="/About"><Icon.FaAmilia size='36'/>About</Link></li>
-        <li><Link  to="/Profile"><CgProfile size='36' />Profile</Link></li>
+        <li><NavLink  to="/Explore"><BsFillHouseDoorFill  size='36'/>Explore</NavLink></li>
+        <li><NavLink  to="/Dish"><BiDish size='36'/>Dish</NavLink></li>
+        <li><NavLink  to="/Contact"><MdImportContacts size='36'/>Contact</NavLink></li>
+        <li><NavLink  to="/About"><Icon.FaAmilia size='36'/>About</NavLink></li>
+        <li><NavLink  to="/Profile"><CgProfile size='36' />Profile</NavLink></li>
         </ul>
         </div>
     )

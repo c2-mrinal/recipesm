@@ -1,11 +1,33 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './createRecipe.css'
 import Select from 'react-select';
 import { AiOutlineArrowDown, AiOutlineArrowUp } from 'react-icons/ai';
-import { BsUpload } from 'react-icons/bs';
+import { MdRateReview } from 'react-icons/md';
+import { useLocation, useHistory } from "react-router-dom";
+import ReactTooltip from 'react-tooltip';
 
 
 function CreateRecipe() {
+
+    const location = useLocation();
+    const history = useHistory();
+  
+        
+   
+    useEffect(() => {
+        if (location.state) {
+        const { edit1view, details, timeDetail, Equipment, Nutrition, Ingredient, PreperationStep } = location.state;
+        // console.log('location.state', location.state);
+        if (edit1view === true) {
+            setrecipeHead(details);
+            setTime(timeDetail);
+            if (Equipment && Equipment.length !== 0) setTotalEquipment(Equipment);
+            if (Nutrition && Nutrition.length !== 0) setTotalNutrition(Nutrition);
+            if (Ingredient && Ingredient.length !== 0) setTotalIngredients(Ingredient);
+            if (PreperationStep && PreperationStep.length !== 0) setPreperation(PreperationStep);
+        }
+    }
+    }, []) 
     let [DisplayAdditional, setDisplayAdditional] = useState(false)
     const ingredientUnit =
         [{ value: 'tsp', label: 'teaspoon' },
@@ -14,7 +36,10 @@ function CreateRecipe() {
         { value: 'c', label: 'cup' },
         { value: 'gal', label: 'gallon' },
         { value: 'dr', label: 'drop' },
-        { value: 'oz', label: 'ounce' },];
+        { value: 'oz', label: 'ounce' },
+        { value: 'gm', label: 'Gram' },
+        { value: 'l', label: 'Liter' },
+        { value: 'ml', label: 'MillLiter' },];
     const eqiupmentUnit =
         [{ value: 'l', label: 'Liter' },
         { value: 'ml', label: 'MillLiter' },];
@@ -22,7 +47,7 @@ function CreateRecipe() {
         [{ value: 'cal', label: 'Calories' },
         { value: 'gm', label: 'Gram' },
         { value: 'j', label: 'Joule' },];
-      
+
     const [checkingID, setcheckingID] = useState(null)
     const [recipeImage, setRecipeImage] = useState(null)
     const [recipeHead, setrecipeHead] = useState({
@@ -30,9 +55,9 @@ function CreateRecipe() {
         recipeDesciption: ''
     });
     const [selectedDropdown, setselectedDropdown] = useState({
-        unitIngred:'',
-        unitEquip:'',
-        unitNutition:'',
+        unitIngred: '',
+        unitEquip: '',
+        unitNutition: '',
     })
     const [unitIngred, setunitIngred] = useState([])
     const [Ingredient, setIngredient] = useState({
@@ -55,44 +80,59 @@ function CreateRecipe() {
         total: '',
         yield: ''
     });
-    const [TotalIngredients, setTotalIngredients] = useState({});
-    const [TotalEquipment, setTotalEquipment] = useState({});
-    const [TotalNutrition, setTotalNutrition] = useState({});
-
+    const [typeSelected, settypeSelected] = useState(null)
+    const [TotalIngredients, setTotalIngredients] = useState([]);
+    const [TotalEquipment, setTotalEquipment] = useState([]);
+    const [TotalNutrition, setTotalNutrition] = useState([]);
 
     let addNewData = (e) => {
         var { value, id, name } = e.target;
-        if (name === 'Ingredient' && Ingredient.item!=='' &&Ingredient.amount!=='' && selectedDropdown.unitIngred !=='') {
-            var ingred = { [Ingredient.item]: Ingredient.amount };
-            setTotalIngredients({ ...TotalIngredients, ...ingred });
+        if (name === 'Ingredient' && Ingredient.item !== '' && Ingredient.amount !== '' && selectedDropdown.unitIngred !== '') {
+            var ingred = { name: Ingredient.item, unit: Ingredient.amount, unitType: selectedDropdown.unitIngred };
+            if (checkingID !== null) {
+                var ing = TotalIngredients;
+                ing[checkingID] = ingred;
+                setTotalIngredients([...ing]);
+                setcheckingID(null);
+            }
+            else {
+                setTotalIngredients([...TotalIngredients, ingred]);
+                setunitIngred([...unitIngred, selectedDropdown.unitIngred]);
+
+            }
             setIngredient({ item: '', amount: '' });
-            if(checkingID == null){
-            setunitIngred([...unitIngred,selectedDropdown.unitIngred]);
-            console.log('add');
+            setselectedDropdown({ ...selectedDropdown, unitIngred: '' });
+        }
+        if (name === 'Equipment' && Equipment.utensil !== '' && Equipment.size !== '' && selectedDropdown.unitEquip !== '') {
+            var equip = { name: Equipment.utensil, unit: Equipment.size, unitType: selectedDropdown.unitEquip };
+            if (checkingID !== null) {
+                var equ = TotalEquipment;
+                equ[checkingID] = equip;
+                setTotalEquipment([...equ]);
+                setcheckingID(null);
             }
-            else{
-                var ing = unitIngred;
-                ing[id] = selectedDropdown.unitIngred
-                console.log('11',ing);
-                setunitIngred([...ing]);
+            else {
+                setTotalEquipment([...TotalEquipment, equip])
+                setunitEquip([...unitEquip, selectedDropdown.unitEquip])
 
             }
-            setselectedDropdown({...selectedDropdown,unitIngred:''});
-        }
-        if (name === 'Equipment'&& Equipment.utensil!== '' && Equipment.size!== '' && selectedDropdown.unitEquip !==''){
-            var equip = { [Equipment.utensil]: Equipment.size };
-            setTotalEquipment({ ...TotalEquipment, ...equip })
             setEquipment({ utensil: '', size: '' })
-            setunitEquip([...unitEquip,selectedDropdown.unitEquip])
-            setselectedDropdown({...selectedDropdown,unitEquip:''})
-
+            setselectedDropdown({ ...selectedDropdown, unitEquip: '' })
         }
-        if (name === 'Nutrition' && Nutrition.nutrent!== '' && Nutrition.portion!=='' && selectedDropdown.unitNutition !=='') {
-            var nutri = { [Nutrition.nutrent]: Nutrition.portion };
-            setTotalNutrition({ ...TotalNutrition, ...nutri })
+        if (name === 'Nutrition' && Nutrition.nutrent !== '' && Nutrition.portion !== '' && selectedDropdown.unitNutition !== '') {
+            var nutri = { name: Nutrition.nutrent, unit: Nutrition.portion, unitType: selectedDropdown.unitNutition };
+            if (checkingID == null) {
+                setTotalNutrition([...TotalNutrition, nutri])
+            }
+            else {
+                var nut = TotalNutrition;
+                nut[checkingID] = nutri;
+                setTotalNutrition([...nut]);
+                setcheckingID(null);
+            }
             setNutrition({ nutrent: '', portion: '' })
-            setunitNutition([...unitNutition,selectedDropdown.unitNutition])
-            setselectedDropdown({...selectedDropdown,unitNutition:''})
+            setunitNutition([...unitNutition, selectedDropdown.unitNutition])
+            setselectedDropdown({ ...selectedDropdown, unitNutition: '' })
         }
         if (name === 'PreperationStep') {
             setPreperation([...Preperation, ''])
@@ -102,31 +142,32 @@ function CreateRecipe() {
             prepValue[id] = value;
             setPreperation([...prepValue]);
         }
-
     }
     let editValue = (e) => {
         e.preventDefault();
-        var value = e.currentTarget.id.split(',');        var id =value['3'];
-        if (value[0] === 'TotalIngredients') {
-            setIngredient({ item: value[1], amount: value[2] })
-            setselectedDropdown({unitIngred:unitIngred[id]})
+        var value = e.currentTarget.id.split(',');
+        var id = value['1'];
+        settypeSelected(value[0]);
+        setIngredient({ item: '', amount: '' });
+        setEquipment({ utensil: '', size: '' });
+        setNutrition({ nutrent: '', portion: '' })
+        setselectedDropdown({ unitIngred: '', unitEquip: '', unitNutition: '' })
+        if (value[0] === 'TotalIngredients' && TotalIngredients.length !== 0) {
+            setIngredient({ item: TotalIngredients[id]['name'], amount: TotalIngredients[id]['unit'] })
+            setselectedDropdown({ unitIngred: TotalIngredients[id]['unitType'] })
             setcheckingID(id);
-
         }
-        if (value[0] === 'TotalEquipment') {
-            setEquipment({ utensil: value[1], size: value[2] })
-            setselectedDropdown({unitEquip:unitEquip[id]})
+        if (value[0] === 'TotalEquipment' && TotalEquipment.length !== 0) {
+
+            setEquipment({ utensil: TotalEquipment[id]['name'], size: TotalEquipment[id]['unit'] })
+            setselectedDropdown({ unitEquip: TotalEquipment[id]['unitType'] })
             setcheckingID(id);
-
         }
-        if (value[0] === 'TotalNutrition') {
-            setNutrition({ nutrent: value[1], portion: value[2] })
-            setselectedDropdown({unitNutition:unitNutition[id]})
+        if (value[0] === 'TotalNutrition' && TotalNutrition.length !== 0) {
+            setNutrition({ nutrent: TotalNutrition[id]['name'], portion: TotalNutrition[id]['unit'] })
+            setselectedDropdown({ unitNutition: TotalNutrition[id]['unitType'] })
             setcheckingID(id);
-         
-
         }
-console.log('checkingID',checkingID);
     }
     let deleteValue = (e) => {
         let { name, value, id } = e.target;
@@ -135,37 +176,16 @@ console.log('checkingID',checkingID);
         var tNutri = TotalNutrition;
         var prep = Preperation;
         if (name === 'TotalIngredients') {
-            Object.keys(TotalIngredients).map(del => {
-                if (del === value) {
-                    delete tIngred[del];
-                }
-            })
-            var  uIngred = unitIngred
-            uIngred.splice(id, 1);
-            setunitIngred([...uIngred]);
-            setTotalIngredients({ ...tIngred });
+            tIngred.splice(id, 1);
+            setTotalIngredients([...tIngred]);
         }
         if (name === 'TotalEquipment') {
-            Object.keys(TotalEquipment).map(del => {
-                if (del === value) {
-                      delete tEquip[del];
-                }
-            })
-            var uEquip = unitEquip;
-            uEquip.splice(id,1);
-            setunitEquip([...uEquip]);
-            setEquipment({ ...tEquip });
+            tEquip.splice(id, 1);
+            setTotalEquipment([...tEquip]);
         }
         if (name === 'TotalNutrition') {
-            Object.keys(TotalNutrition).map(del => {
-                if (del === value) {
-                    delete tNutri[del];
-                }
-            })
-            var uNutition = unitNutition
-            uNutition.splice(id,1);
-            setunitNutition([...uNutition]);
-            setTotalNutrition({ ...tNutri });
+            tNutri.splice(id, 1);
+            setTotalNutrition([...tNutri]);
         }
 
         if (name === 'PreperationStep') {
@@ -174,12 +194,23 @@ console.log('checkingID',checkingID);
         }
 
     }
-    
-    var finalSubmit = (e) => {
-        console.log('all', TotalIngredients, TotalEquipment, TotalNutrition);
-        console.log('samllData', Ingredient, Equipment, Nutrition, Time, Preperation);
-
+    var makeReview = (e) => {
+        return history.push({
+            pathname: '/ViewRecipe',
+            search: '?update=true',  // query string
+            state: {
+                edit2view: true,
+                TotalIngredients: TotalIngredients,
+                TotalEquipment: TotalEquipment,
+                TotalNutrition: TotalNutrition,
+                Preperation: Preperation,
+                Time: Time,
+                RecipeHead: recipeHead,
+            },
+        });
     }
+
+
     return (
         <div>
             <section className='descBox'>
@@ -187,8 +218,8 @@ console.log('checkingID',checkingID);
                     <input class="file-upload" type="file" accept="image/*" onChange={(e) => { setRecipeImage(URL.createObjectURL(e.target.files[0])) }} />
                     {recipeImage != null && <button onClick={(e) => { setRecipeImage(null) }}>Remove</button>}
                     <div className='imageDisplay'>
-                        {recipeImage!=null && <img src={recipeImage} alt='Select an Image'/>}
-                        </div>
+                        {recipeImage != null && <img src={recipeImage} alt='Select an Image' />}
+                    </div>
                 </div>
                 <div>
                     <div className="inputPosition field">
@@ -224,25 +255,27 @@ console.log('checkingID',checkingID);
                                     placeholder='Units'
                                     name='Ingredient'
                                     value={selectedDropdown.unitIngred}
-                                    onChange={(e)=>{setselectedDropdown({...selectedDropdown,unitIngred:e})}}
+                                    onChange={(e) => { setselectedDropdown({ ...selectedDropdown, unitIngred: e }) }}
                                     options={ingredientUnit}
                                 />
                             </div>
                         </div>
                         <div className='addButton'>
-                            <input type='button' value='Add Ingredient' name='Ingredient' className='addClickButton' onClick={addNewData} />
+                            <input type='button' value='Add Ingredient' name='Ingredient' className='addClickButton' data-tip='Save to Ingredient Table ' onClick={addNewData} />
+                            <ReactTooltip />
                         </div>
                     </div>
                     <div className='addedIngredientBox'>
-                        {TotalIngredients !== {} &&
-                            Object.entries(TotalIngredients).map((t, id) => {
+                        {TotalIngredients && TotalIngredients.length != 0 &&
+                            TotalIngredients.map((t, id) => {
                                 return (
-                                    <div className='inputCapsule' id={'TotalIngredients,' + t+','+id} onClick={editValue}>
-                                        <div className='dataCapsule'>
-                                            <div>{t[0]}</div>
-                                            <div className='centerCapsule'>{t[1]}<span className='unitIndicator'>{unitIngred[id].value}</span></div>
-                                            </div>
-                                        <div className='closeCapsule' ><button id={id} name='TotalIngredients' value={t[0]} onClick={deleteValue} >X</button></div>
+                                    <div className={checkingID == id && typeSelected == 'TotalIngredients' ? 'inputCapsuleClicked' : 'inputCapsule'} >
+                                        <div className='dataCapsule' id={'TotalIngredients,' + id} onClick={editValue} data-tip='Click to Modify It ' >
+                                            <div>{t['name']}</div>
+                                            <div className='centerCapsule'>{t['unit']}<span className='unitIndicator'>{t['unitType'].value}</span></div>
+                                        </div>
+                                        <div className='closeCapsule' ><button id={id} name='TotalIngredients' value={t['name']} onClick={deleteValue}  data-tip='DELETE ' data-background-color='tomato'>X</button></div>
+                                        <ReactTooltip />
                                     </div>
                                 )
                             })}
@@ -269,25 +302,29 @@ console.log('checkingID',checkingID);
                                 <Select
                                     placeholder='Units'
                                     value={selectedDropdown.unitEquip}
-                                    onChange={(e)=>{setselectedDropdown({...selectedDropdown,unitEquip:e})}}
+                                    onChange={(e) => { setselectedDropdown({ ...selectedDropdown, unitEquip: e }) }}
                                     options={eqiupmentUnit}
                                 />
                             </div>
                         </div>
                         <div className='addButton'>
-                            <input type='button' value='Add Equipment' name='Equipment' className='addClickButton' onClick={addNewData} />
+                            <input type='button' value='Add Equipment' name='Equipment' className='addClickButton' onClick={addNewData} data-tip='Save to Equipment Table ' />
+                            <ReactTooltip/>
                         </div>
                     </div>
                     <div className='addedIngredientBox'>
-                        {TotalEquipment !== {} &&
-                            Object.entries(TotalEquipment).map((t, id) => {
+                        {TotalEquipment && TotalEquipment.length !== 0 &&
+                            TotalEquipment.map((t, id) => {
                                 return (
-                                    <div className='inputCapsule' id={'TotalEquipment,' + t} onClick={editValue}>
-                                        <div className='dataCapsule'>
-                                            <div>{t[0]}</div>
-                                            <div className='centerCapsule'>{t[1]}<span className='unitIndicator'>{unitEquip[id].value}</span></div>
+                                    <div className={checkingID == id && typeSelected == 'TotalEquipment' ? 'inputCapsuleClicked' : 'inputCapsule'} >
+                                        <div className='dataCapsule'  id={'TotalEquipment,' + id} onClick={editValue} data-tip='Click to Modify It '>
+                                            <div>{t['name']}</div>
+                                            <div className='centerCapsule'>{t['unit']}<span className='unitIndicator'>{t['unitType'].value}</span></div>
+                                        </div>
+                                        <div className='closeCapsule' >
+                                            <button id={id} name='TotalEquipment' value={t['name']} onClick={deleteValue} data-tip='DELETE ' data-background-color='tomato'>X</button>
                                             </div>
-                                        <div className='closeCapsule' ><button id={id} name='TotalEquipment' value={t[0]} onClick={deleteValue} >X</button></div>
+                                        <ReactTooltip />
                                     </div>
                                 )
                             })}
@@ -297,9 +334,9 @@ console.log('checkingID',checkingID);
             <section className='preperationBox'>
                 <div className='prepHeader'>
                     <div> <h2 className={{ display: 'inline' }}>Preperation Steps</h2> </div>
-                    <div><button type='button' name='PreperationStep' className='PreperationStepAdd' onClick={addNewData}>+</button></div>
+                    <div><button type='button' name='PreperationStep' className='PreperationStepAdd' onClick={addNewData} data-tip='Add Step '>+</button></div>
                 </div>
-                {Preperation.length !== 0 &&
+                {Preperation && Preperation.length !== 0 &&
                     Preperation.map((v, id) => {
                         return (<div className='eachPrepStep'>
                             <div className='stepNumber'>
@@ -309,7 +346,8 @@ console.log('checkingID',checkingID);
                                 <textarea className='stepDescTextarea' placeholder='Add Your Delicious Step' key={id} name='Preperation' id={id} onChange={addNewData} value={v} />
                             </div>
                             <div>
-                            <button type="button" name='PreperationStep' className='deleteStepPrep' id={id} onClick={deleteValue}>X</button>
+                                <button type="button" name='PreperationStep' className='deleteStepPrep' id={id} onClick={deleteValue} data-tip='DELETE ' data-background-color='tomato'>X</button>
+                                <ReactTooltip />
                             </div>
                         </div>)
                     })}
@@ -355,24 +393,31 @@ console.log('checkingID',checkingID);
                                                     placeholder='Units'
                                                     value={selectedDropdown.unitNutition}
                                                     name='Nutrition'
-                                                    onChange={(e)=>{setselectedDropdown({...selectedDropdown,unitNutition:e})}}
+                                                    onChange={(e) => { setselectedDropdown({ ...selectedDropdown, unitNutition: e }) }}
                                                     options={nutitionUnit}
                                                 />
                                             </div>
                                         </div>
                                         <div className='addButton'>
-                                            <input type='button' value='Add Nutrition' name='Nutrition' className='addClickButton' onClick={addNewData} />
+                                            <input type='button' value='Add Nutrition' name='Nutrition' className='addClickButton' onClick={addNewData} data-tip='Save to Nutrition Table ' />
+                                            <ReactTooltip/>
                                         </div>
                                     </div>
                                     <div className='addedIngredientBox'>
-                                        {TotalNutrition !== {} &&
-                                            Object.entries(TotalNutrition).map((t, id) => {
+                                        {TotalNutrition && TotalNutrition.length !== 0 &&
+                                            TotalNutrition.map((t, id) => {
                                                 return (
-                                                    <div className='inputCapsule' id={'TotalNutrition,' + t} onClick={editValue}>
-                                                        <div className='dataCapsule'>
-                                                            <div>{t[0]}</div>
-                                                            <div className='centerCapsule'>{t[1]}<span className='unitIndicator'>{unitNutition[id].value}</span></div></div>
-                                                        <div className='closeCapsule' ><button id={id} name='TotalNutrition' value={t[0]} onClick={deleteValue} >X</button></div>
+                                                    <div className={checkingID == id && typeSelected == 'TotalNutrition' ? 'inputCapsuleClicked' : 'inputCapsule'} >
+                                                        <div className='dataCapsule'  id={'TotalNutrition,' + id} onClick={editValue}  data-tip='Click to Modify It '>
+                                                            <div>{t['name']}</div>
+                                                            <div className='centerCapsule'>{t['unit']}
+                                                            <span className='unitIndicator'>{t['unitType'].value}</span>
+                                                            </div>
+                                                            </div>
+                                                        <div className='closeCapsule' >
+                                                            <button id={id} name='TotalNutrition' value={t['name']} onClick={deleteValue} data-tip='DELETE ' data-background-color='tomato'>X</button>
+                                                            </div>
+                                                        <ReactTooltip />
                                                     </div>)
                                             })}
                                     </div>
@@ -390,7 +435,8 @@ console.log('checkingID',checkingID);
                         </div>
                     </div>}
             </section>
-            <button type="button" className='finalSubmitButton' onClick={finalSubmit} >  <BsUpload />Save</button>
+            <button type="button" className='finalSubmitButton' onClick={makeReview} data-tip='Click to review your input'>  Review <span><MdRateReview /></span></button>
+            <ReactTooltip />
         </div>
     )
 
