@@ -2,7 +2,7 @@ import React , {useState} from 'react'
 import './allContent.css'
 
 export default function Dish() {
-    const [cusine, setCusine] = useState(['Indian', 'Continental', 'Italian', 'American', 'Mexican', 'Asian', 'Chinese', 'Greek' , 'Mediterina'])
+    const [cusine] = useState(['Indian', 'Continental', 'Italian', 'American', 'Mexican', 'Asian', 'Chinese', 'Greek' , 'Mediterina'])
 
     return (
         <div>

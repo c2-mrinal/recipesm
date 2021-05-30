@@ -170,7 +170,7 @@ function CreateRecipe() {
         }
     }
     let deleteValue = (e) => {
-        let { name, value, id } = e.target;
+        let { name, id } = e.target;
         var tIngred = TotalIngredients;
         var tEquip = TotalEquipment;
         var tNutri = TotalNutrition;
@@ -239,15 +239,15 @@ function CreateRecipe() {
                 <section className='ingredientBox'>
                     <div className='addIngredient'>
                         <div className="inputPosition field">
-                            <input type="input" className="inputArea" placeholder="Ingredient" name="item" value={Ingredient.item}
+                            <input type="input" className="inputArea" placeholder="Ingredient" name="item" id='IngredientName' value={Ingredient.item}
                                 onChange={(e) => setIngredient({ ...Ingredient, item: e.target.value })} />
                             <label htmlFor="name" className="inputLable">Ingredient</label>
                         </div>
                         <div className='amountANDunit'>
                             <div className="inputPosition field">
-                                <input type="number" className="inputArea" placeholder="amount" name="amount" value={Ingredient.amount}
+                                <input type="number" className="inputArea" placeholder="amount" name="amount" id='IngredientAmount' value={Ingredient.amount}
                                     onChange={(e) => setIngredient({ ...Ingredient, amount: e.target.value })} />
-                                <label fohtmlForr="name" className="inputLable">Amount</label>
+                                <label fohtmlForr="IngredientAmount" className="inputLable">Amount</label>
                             </div>
                             <div className='selectDropdown'>
 
@@ -266,10 +266,10 @@ function CreateRecipe() {
                         </div>
                     </div>
                     <div className='addedIngredientBox'>
-                        {TotalIngredients && TotalIngredients.length != 0 &&
+                        {TotalIngredients && TotalIngredients.length !== 0 &&
                             TotalIngredients.map((t, id) => {
                                 return (
-                                    <div className={checkingID == id && typeSelected == 'TotalIngredients' ? 'inputCapsuleClicked' : 'inputCapsule'} >
+                                    <div className={checkingID == id && typeSelected === 'TotalIngredients' ? 'inputCapsuleClicked' : 'inputCapsule'} >
                                         <div className='dataCapsule' id={'TotalIngredients,' + id} onClick={editValue} data-tip='Click to Modify It ' >
                                             <div>{t['name']}</div>
                                             <div className='centerCapsule'>{t['unit']}<span className='unitIndicator'>{t['unitType'].value}</span></div>
@@ -316,7 +316,7 @@ function CreateRecipe() {
                         {TotalEquipment && TotalEquipment.length !== 0 &&
                             TotalEquipment.map((t, id) => {
                                 return (
-                                    <div className={checkingID == id && typeSelected == 'TotalEquipment' ? 'inputCapsuleClicked' : 'inputCapsule'} >
+                                    <div className={checkingID == id && typeSelected === 'TotalEquipment' ? 'inputCapsuleClicked' : 'inputCapsule'} >
                                         <div className='dataCapsule'  id={'TotalEquipment,' + id} onClick={editValue} data-tip='Click to Modify It '>
                                             <div>{t['name']}</div>
                                             <div className='centerCapsule'>{t['unit']}<span className='unitIndicator'>{t['unitType'].value}</span></div>
@@ -407,7 +407,7 @@ function CreateRecipe() {
                                         {TotalNutrition && TotalNutrition.length !== 0 &&
                                             TotalNutrition.map((t, id) => {
                                                 return (
-                                                    <div className={checkingID == id && typeSelected == 'TotalNutrition' ? 'inputCapsuleClicked' : 'inputCapsule'} >
+                                                    <div className={checkingID == id && typeSelected === 'TotalNutrition' ? 'inputCapsuleClicked' : 'inputCapsule'} >
                                                         <div className='dataCapsule'  id={'TotalNutrition,' + id} onClick={editValue}  data-tip='Click to Modify It '>
                                                             <div>{t['name']}</div>
                                                             <div className='centerCapsule'>{t['unit']}

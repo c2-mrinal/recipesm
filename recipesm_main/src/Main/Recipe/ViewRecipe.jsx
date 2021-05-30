@@ -22,7 +22,7 @@ function ViewRecipe() {
     const [Nutrition, setNutrition] = useState([{ name: 'Fat', unit: '1', unitType: { value: 'NaN' } }]);
     const [Ingredient, setIngredient] = useState([{ name: 'Coffee', unit: '1', unitType: { value: 'NaN' } }]);
     const [PreperationStep, setPreperationStep] = useState([1]);
-    const [ratingNreview, setratingNreview] = useState([1, 2, 3, 4, 5]);
+    const [ratingNreview] = useState([1, 2, 3, 4, 5]);
     const [userRatingNreview, setuserRatingNreview] = useState({
         rating: '',
         review: ''
@@ -88,7 +88,7 @@ function ViewRecipe() {
                     </div>
                 }
 
-                {Nutrition.length != 0 &&
+                {Nutrition.length !== 0 &&
                     <fieldset className="nutritionDetail">
                         <legend><h2>Nutrition</h2></legend>
                         {

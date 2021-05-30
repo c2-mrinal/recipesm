@@ -8,7 +8,8 @@ import {NavLink} from 'react-router-dom';
 
 import './Menu.css';
 import Login from './Login';
-
+let urlIS= window.location.pathname
+console.log(urlIS);
 
 function Menu() {
     const [loginBox, setLoginBox] = useState(false);
@@ -26,7 +27,7 @@ function Menu() {
                <button onClick={()=>{setLoginBox(loginBox=>!loginBox)}}>Login/Register </button>
               {loginBox && <Login></Login>}
             </div> 
-        <ul>
+        <ul className='navbarUL'>
         <li><NavLink  to="/Explore"><BsFillHouseDoorFill  size='36'/>Explore</NavLink></li>
         <li><NavLink  to="/Dish"><BiDish size='36'/>Dish</NavLink></li>
         <li><NavLink  to="/Contact"><MdImportContacts size='36'/>Contact</NavLink></li>

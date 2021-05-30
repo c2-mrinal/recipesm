@@ -9,16 +9,36 @@ export default function Explore() {
     return (
 
         <div style={{backgroundColor:' ', width:'100%', height:'100%'}} >
-            <div style={{padding:'50 auto', textAlign:'center'}}>
+            <div>
+            <div style={{margin:'30px auto'}}>
              <h1 >Popular</h1>
              </div>
-            <Swiper slidesPerView={3} spaceBetween={70} freeMode={true} loop={false} pagination={{"clickable": true}} className="mySwiper">
+            <Swiper slidesPerView={4} spaceBetween={50} freeMode={true} loop={false} pagination={{"clickable": true}} className="mySwiper">
           { popular.map(p =>  {
                return(
                 <SwiperSlide>
                 <div class="card" style={{backgroundImage:"url(" +"https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=350"+")" }}>
                     <div class="content">
                         <h2 class="title">Dish Name</h2>
+                        <p class="copy">Coffee and its aruma </p><button class="btn">View Recipe</button>
+                    </div>
+                </div>
+            </SwiperSlide>
+               )
+           })}
+         </Swiper>
+         </div>
+         <div>
+            <div style={{margin:'30px auto'}}>
+             <h1 >Cusines by Country</h1>
+             </div>
+            <Swiper slidesPerView={6} spaceBetween={50} freeMode={true} loop={false} pagination={{"clickable": true}} className="mySwiper">
+          { popular.map(p =>  {
+               return(
+                <SwiperSlide>
+                <div class="card" style={{backgroundImage:"url(" +"https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=350"+")" }}>
+                    <div class="content">
+                        <h2 class="title">Country</h2>
                         <p class="copy">Coffee and its arauma </p><button class="btn">View Recipe</button>
                     </div>
                 </div>
@@ -26,8 +46,26 @@ export default function Explore() {
                )
            })}
          </Swiper>
-  
-        
+         </div>
+         <div>
+            <div style={{margin:'30px auto'}}>
+             <h1 >Recent Added</h1>
+             </div>
+            <Swiper slidesPerView={8} spaceBetween={20} freeMode={true} loop={false} pagination={{"clickable": true}} className="mySwiper">
+          { popular.map(p =>  {
+               return(
+                <SwiperSlide>
+                <div class="card" style={{backgroundImage:"url(" +"https://images.pexels.com/photos/312418/pexels-photo-312418.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=350"+")" }}>
+                    <div class="content">
+                        <h2 class="title">Recent Add</h2>
+                        <p class="copy">Coffee and its arauma </p><button class="btn">View Recipe</button>
+                    </div>
+                </div>
+            </SwiperSlide>
+               )
+           })}
+         </Swiper>
+         </div>
 
         </div>
     )
