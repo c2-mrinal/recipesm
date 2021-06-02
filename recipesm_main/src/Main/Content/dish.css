@@ -1,0 +1,57 @@
+button, input[type="submit"], input[type="reset"] {
+	background: none;
+	color: inherit;
+	border: none;
+	padding: 0;
+	font: inherit;
+	cursor: pointer;
+	outline: inherit;
+}
+
+.dishTasteBox{
+    display: flex;
+
+}
+.dishKeyName{
+    border: 1px solid;
+    margin: auto 10px;
+    padding: 2px 8px;
+    border-radius: 30%;
+}
+.dishKeyName:hover
+{
+    border: 2px solid yellowgreen;
+}
+.dishKeyContentBox{
+    margin: 20px auto;
+}
+.dishKeyContent{
+display: grid;
+  grid-template-columns: repeat(10, 0.5fr);
+margin-top: 20px auto;
+}
+.bowlConatiner{
+height: 500px;
+width: 500px;
+background-image: url(./bowl.svg);
+margin: 100px auto 0px auto;
+}
+.bowlBody{
+
+}
+.displaySelctedIngredBody{
+    display: grid;
+  grid-template-columns: repeat(10, 1fr);
+margin-top: 20px auto;
+}
+.displaySelctedIngred{
+border: 1px solid gainsboro;
+border-radius: 10px;
+}
+.deleteSelectedIngredButton{
+    color: tomato;
+    border: 1px solid tomato;
+    border-radius: 50%;
+    margin-left: 3px;
+    padding: 0 3px;
+}
