@@ -62,4 +62,5 @@ class Rating(Model):
     comments = Column(String(150))
     user_id = Column(Integer,ForeignKey('user.user_id'))
     # created_on = Column(DateTime, default= datetime.now() )
+    # 
     
