@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/c2-mrinal/recipesm/issues"
   },
-  "homepage": "https://github.com/c2-mrinal/recipesm#readme"
+  "homepage": "https://github.com/c2-mrinal/recipesm#readme",
+  "dependencies": {
+    "react-infinite-scroll-component": "^6.1.0",
+    "react-vertical-timeline-component": "^3.3.3"
+  }
 }

@@ -1,0 +1,117 @@
+
+.userProfileHeader{
+    display:grid;
+    grid-template-columns:4fr 8fr;
+    grid-gap: 20px;
+    height:25vh;
+    background: #1D2B64; 
+    background: -webkit-linear-gradient(to right, #F8CDDA, #1D2B64);  
+  background: linear-gradient(to right, #F8CDDA, #1D2B64);
+  transition-duration: 0.5s;
+  }
+  .userProfileHeaderScroll{
+    display:none;
+    transition-duration: 0.5s;
+
+  }
+  .userProfileImage{
+    margin:auto;
+    width:90%;
+    height:100%;
+    border:1px solid black;
+    border-radius:20px;
+  }
+  .userProfileDetail{
+    display:none;
+    ransition-duration: 0.5s;
+  }
+  .userProfileStickyHeader{
+    display: flex;
+    justify-content: space-around;
+    position: -webkit-sticky; /* Safari */
+   position: sticky;
+    top: 0;
+    position: sticky;
+    transition-delay: 0.1s;
+    transition-duration: 0.5s;
+    width: 100%;
+    height: 120px;
+    background-color: #E7E9BB;
+  }
+  .userProfileStickyHeaderBefore{
+    display: none;
+  }
+  .TabContainerSide{
+
+  }
+  .TabContainerUpper{
+    
+  }
+  .inputFieldLine{
+    display: flex;
+    margin: 30px 20px;
+
+    text-align: center;
+  }
+  .inputFieldLine span{
+  width:10%;
+   display: flex;
+   align-items: flex-end;
+   font-size: 1.2em;
+    font-weight: 600;
+  }
+  .inputFieldLine .inputArea{
+    width:40%;
+  }
+  .inputFieldLine  {
+    border:none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    -ms-appearance: none;
+  }
+  .inputSelect{
+ 
+    border-bottom:1px solid black ;
+    width:40%;
+
+  }
+  .btn-grad {
+    background-image: linear-gradient(to right, #403B4A 0%, #E7E9BB  51%, #403B4A  100%)}
+    .btn-grad {
+     margin: 10px;
+     text-align: center;
+     text-transform: uppercase;
+     transition: 0.5s;
+     background-size: 200% auto;
+     color: white;            
+     box-shadow: 0 0 20px #eee;
+     border-radius: 10px;
+     display: block;}
+  
+  .btn-grad:hover {
+   background-position: right center; 
+    color: #fff;
+    text-decoration: none;
+            }
+           
+  .profileContentDispalyMain{
+    display:grid;
+    grid-template-columns:1fr 6fr;
+    grid-gap: 10px;
+  }
+  .contentDisplayHeader{
+  height:150vh;
+  background: #1D2B64; 
+  background: -webkit-linear-gradient(to bottom, #F8CDDA, #1D2B64);  
+  background: linear-gradient(to bottom, #F8CDDA, #1D2B64);
+  }
+  .contentDisplayHeader p{
+    text-transform: uppercase;
+    margin:auto;
+    text-align:center;
+    margin:50px 0; 
+  }
+  .contentDisplayHeader p:hover{
+    color: #FFF5C3;
+  }

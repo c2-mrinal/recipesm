@@ -10,7 +10,6 @@ function App() {
       <div>
       <Menu className='menuApp'></Menu>
       </div>
-      
       <div className='mainApp'>
               <Main ></Main>
       </div>
