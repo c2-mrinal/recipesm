@@ -58,9 +58,9 @@ export default function Dish() {
                     return <div>
                         <div className='dishKeyContent'>
                             {dish.value.map((val, i) => {
-                                return <div draggable={true} onDragStart={dragging} id={val}>
-                                    {dish.display === true && <div className='dishValueName'>{Custom.titleCase(val)}</div>}
-                                </div>
+                                return <span draggable={true} onDragStart={dragging} id={val}>
+                                    {dish.display === true && <span className='dishValueName'>{Custom.titleCase(val)}</span>}
+                                </span>
                             })}
                         </div>
                     </div>
@@ -74,16 +74,16 @@ export default function Dish() {
             </section>
             <div className='displaySelctedIngredBody'>
                 {IngredientSelected.map((ingred)=>{
-                        return <div>
+                        return <>
                             <span className='displaySelctedIngred'>{Custom.titleCase(ingred)}</span>
                             <span className='deleteSelectedIngredButton'>
                             <input type="submit" value='X' id={ingred} onClick={deleteSelectedIngred} />
                             </span>
-                        </div>
+                        </>
                 })}
             </div>
-<div>
-    <input type="button" value='Make Me Recipes' />
+<div className='makeRecipeButton'>
+    <input type="submit" value='Make Me Recipes' />
 </div>
         </div>
 
