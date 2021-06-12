@@ -1,57 +1,66 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
+import { FaGooglePlusG, FaFacebookSquare } from 'react-icons/fa';
+
 import './login.css'
 
-function Login() {
+function Login(props) {
     const [change, setChange] = useState((false));
-    // var showLogin = (e) => {
-    //     let parent = e.target.parentNode.parentNode;
-    //     console.log('parent',parent);
-    //     Array.from(e.target.parentNode.parentNode.classList).find((element) => {
-    //         if(element !== "slide-up") {
-    //             parent.classList.add('slide-up')
-    //         }else{
-    //             // showSignup.parentNode.classList.add('slide-up')
-    //             parent.classList.remove('slide-up')
-    //         }
-    //     });
-    // }
-    // var showSignup  =(e) => {
-    //     let parent = e.target.parentNode;
-    //     Array.from(e.target.parentNode.classList).find((element) => {
-    //         if(element !== "slide-up") {
-    //             parent.classList.add('slide-up')
-    //         }else{
-    //             // showLogin.parentNode.parentNode.classList.add('slide-up')
-    //             parent.classList.remove('slide-up')
-    //         }
-    //     });
-    // }
-    console.log('change',change);
+    const [loginRegister, setloginRegister] = useState('Login')
+
+    const loginForm= (e)=>{
+        setloginRegister(e.target.name)
+    }
     return (
         <div>
-            <div className='loginFormBox'>
-            <div className="form-structor">
-                    <div className={"signup" +( change?"slide-up":' ')}>
-                        <h2 className="form-title"   onClick={()=>setChange(change=>!change)}><span>or</span>Sign up</h2>
-                        <div className="form-holder">
-                        <input type="text" className="input" placeholder="Name" />
-                        <input type="email" className="input" placeholder="Email" />
-                        <input type="password" className="input" placeholder="Password" />
-                        </div>
-                        <button className="submit-btn"     >Sign up</button>
+            <div className='outerLogin' onClick={() => { props.changeLogin() }}>        </div>
+
+            <section class='LoginBorder'>
+                <div className='radioOuter'><label class='radioLable'>
+                    <input type="radio" name="Login" class='radioInput' checked={loginRegister==='Login' ?true:false} onClick={loginForm}/>
+                    <div class="front-end radioBox"><span class='radioText'>Login</span></div>
+                </label>
+                    <label class='radioLable'>
+                        <input type="radio" class='radioInput' name="Register" checked={loginRegister==='Register'?true:false}  onClick={loginForm} />
+                        <div class="back-end radioBox"><span class='radioText'>Register</span></div>
+                    </label>
                     </div>
-                    <div className={"login" +(change?" ":"slide-up")}>
-                        <div className="center">
-                        <h2 className="form-title"   onClick={()=>setChange(change=>!change)} ><span>or</span>Log in</h2>
-                        <div className="form-holder">
-                            <input type="email" className="input" placeholder="Email" />
-                            <input type="password" className="input" placeholder="Password" />
+               {loginRegister==='Login' &&
+                <div class='LoginBorderInner'>
+                    <div class='inputTogether '>
+                        <div>Username/Email:</div><input type='text' placeholder='username' />
+                    </div>
+                    <div class='inputTogether '>
+                        <div>Password:</div><input type='text' placeholder='Password' />
+                    </div>
+                    <div>
+                        <div class='buttonBox'>
+                            <input type='button' value='Login' />
                         </div>
-                        <button className="submit-btn"    >Log in</button>
+                        <a href=''>Forget Password</a>
+                    </div>
+                    <div class='otherLoginOptions'>
+                        or Login with
+                        <div class='d-flex justify-content-evenly'>
+                            <span><FaGooglePlusG size='30' /> </span>
+                            <span><FaFacebookSquare size='30' /></span>
                         </div>
                     </div>
-                    </div>
-                </div>
+                </div>}
+                {loginRegister==='Register' &&
+               <div class='LoginBorderInner'>
+               <div class='inputTogether '>
+                 <div>Username/Email:</div><input type='text' placeholder='username'/></div>
+                <div class='inputTogether '>
+                  <div>Password:</div><input type='text' placeholder='Password'/></div>
+                 <div class='inputTogether '>
+                  <div>Repeat-Password:</div><input type='text' placeholder='Re-Password'/></div>
+               <div>
+                 <div class='buttonBox'><input type='button' value='Register'/></div>
+                 </div>
+                 </div>
+            
+                }
+            </section>
         </div>
     )
 }

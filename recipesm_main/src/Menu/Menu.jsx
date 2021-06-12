@@ -13,7 +13,7 @@ console.log(urlIS);
 
 function Menu() {
     const [loginBox, setLoginBox] = useState(false);
-  
+  const changeLogin=()=>{setLoginBox(!loginBox)}
     return (
         <div>
            <div className='logoFixed'>
@@ -25,7 +25,7 @@ function Menu() {
                 </form>
                </div>
                <button onClick={()=>{setLoginBox(loginBox=>!loginBox)}}>Login/Register </button>
-              {loginBox && <Login></Login>}
+              {loginBox && <Login changeLogin={changeLogin}></Login>}
             </div> 
         <ul className='navbarUL'>
         <li><NavLink  to="/Explore"><BsFillHouseDoorFill  size='36'/>Explore</NavLink></li>
